@@ -112,13 +112,12 @@ const NotFound: React.FC = () => {
           src="./images/suspicious-dog.png"
           alt="Page Not Found"
           style={{
-            width: '200px', // Adjust the size as needed
+            width: '200px', 
             height: 'auto',
             marginBottom: '20px',
           }}
         />
 
-        {/* Title */}
         <Typography
           variant="h1"
           sx={{
@@ -131,7 +130,6 @@ const NotFound: React.FC = () => {
           404
         </Typography>
 
-        {/* Subtitle */}
         <Typography
           variant="h4"
           sx={{
@@ -144,7 +142,6 @@ const NotFound: React.FC = () => {
           Oops! Page Not Found
         </Typography>
 
-        {/* Description */}
         <Typography
           variant="body1"
           sx={{

@@ -39,13 +39,11 @@ const DogList: React.FC = () => {
   const [showFavoritesModal, setShowFavoritesModal] = useState<boolean>(false);
   const [favoriteDogs, setFavoriteDogs] = useState<Dog[]>([]);
 
-  // ZIP code search state
   const [zipCode, setZipCode] = useState<string>('');
   const [locationResults, setLocationResults] = useState<Location[]>([]);
 
   const pageSize = 30;
 
-  // Fetch breeds on component mount
   useEffect(() => {
     const loadBreeds = async () => {
       try {
@@ -62,7 +60,6 @@ const DogList: React.FC = () => {
     loadBreeds();
   }, []);
 
-  // Fetch dogs based on filters, pagination, and sorting
   useEffect(() => {
     const loadDogs = async () => {
       setLoading(true);
@@ -81,7 +78,6 @@ const DogList: React.FC = () => {
     loadDogs();
   }, [selectedBreed, page, sort]);
 
-  // Fetch favorite dogs when favorites change
   useEffect(() => {
     const loadFavoriteDogs = async () => {
       if (favorites.length > 0) {
@@ -99,7 +95,6 @@ const DogList: React.FC = () => {
     loadFavoriteDogs();
   }, [favorites]);
 
-  // Handle ZIP code search
   const handleSearchByZipCode = async () => {
     if (!zipCode) {
       setError('Please enter a valid ZIP code.');
@@ -108,7 +103,6 @@ const DogList: React.FC = () => {
   
     setLoading(true);
     try {
-      // Fetch locations using the ZIP code
       const locationFilters = {
         zipCode: zipCode, 
         size: 100,
@@ -116,7 +110,6 @@ const DogList: React.FC = () => {
       
       const locationData = await searchLocations(locationFilters);
   
-      // Fetch dogs using the ZIP codes
       const searchResult = await fetchDogs(selectedBreed ? [selectedBreed] : [], page, pageSize, sort, zipCode ? [zipCode] : []);
       const dogDetails = await fetchDogDetails(searchResult.resultIds);
       console.log(searchResult)
@@ -146,23 +139,19 @@ const DogList: React.FC = () => {
     }
   }
 
-  // Handle breed filter change
   const handleBreedChange = (event: any) => {
     setSelectedBreed(event.target.value as string);
     setPage(0);
   };
 
-  // Handle sort change
   const handleSortChange = (event: any) => {
     setSort(event.target.value as string);
   };
 
-  // Handle pagination
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
 
-  // Toggle favorite dogs
   const toggleFavorite = (dogId: string) => {
     if (favorites.includes(dogId)) {
       setFavorites(favorites.filter((id) => id !== dogId));
@@ -171,7 +160,6 @@ const DogList: React.FC = () => {
     }
   };
 
-  // Generate a match from favorites
   const handleGenerateMatch = async () => {
     if (favorites.length === 0) {
       setError('Please select at least one favorite dog.');
@@ -191,7 +179,6 @@ const DogList: React.FC = () => {
     }
   };
 
-  // Handle logout
   const handleLogout = async () => {
     try {
       const response = await fetch('https://frontend-take-home-service.fetch.com/auth/logout', {
@@ -199,7 +186,7 @@ const DogList: React.FC = () => {
         credentials: 'include',
       });
       if (response.ok) {
-        window.location.href = '/'; // Redirect to the login page
+        window.location.href = '/'; 
       } else {
         setError('Failed to logout. Please try again.');
       }
@@ -209,7 +196,6 @@ const DogList: React.FC = () => {
     }
   };
 
-  // Close error alert
   const handleCloseError = () => {
     setError(null);
   };

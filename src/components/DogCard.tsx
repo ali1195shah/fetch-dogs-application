@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dog } from '../Dog.ts'; // Import the Dog type
+import { Dog } from '../Dog.ts'; 
 import {
   Card,
   CardMedia,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Container, Typography, Box } from '@mui/material'; // Using Material-UI for styling
+import { TextField, Button, Container, Typography, Box } from '@mui/material'; 
 
 const Login: React.FC = () => {
   const [name, setName] = useState<string>('');
@@ -27,7 +27,6 @@ const Login: React.FC = () => {
         },
         body: JSON.stringify({ name, email }),
       });
-      // console.log(response.status)
 
       if (response.ok) {
         navigate('/home');
